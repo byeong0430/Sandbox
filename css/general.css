@@ -21,11 +21,18 @@ body {
 
 #nav-title h1{
     font-weight: bold;
+    margin-top: 20px;
 }
 #nav-title h6{
     font-weight: bold;
     color: pink;
 }
+
+.navbar-toggler {
+    margin: auto;
+    display: block;
+}
+
 /* Top navigation */
 
 /* Main body*/
@@ -47,7 +54,8 @@ body {
 #nav-container, .inner-shell {
     border-style: solid;
     border-width: thin;
-    border-color: #efefef;
+    border-color: #e1e1e1;
+    border-radius: 3px;
 }
 
 /* Profile */
@@ -58,6 +66,11 @@ body {
     border-color: rgb(236, 236, 236);
     position: relative;
     padding: 10px;
+    width: 100%; /* Fix the speech bubble width to 100% so that it doesn't change as typing.js happens */
+    
+    height: 120px;
+    line-height: 90px;
+    text-align: center;
 }
 
 .speech-bubble:after {    
@@ -68,6 +81,12 @@ body {
     bottom: -34px;
     left: 90px;
     content: "";
+}
+
+span {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
 }
 /* Speech bubble */
 
