@@ -1,0 +1,108 @@
+html {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 300;
+    line-height: 1.5;
+}
+
+/* Set default left- and right-margin as 22%*/
+body {
+    background-color: #f5f5f5;
+    font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #433d3d;
+    text-align: center;
+}
+
+/* Top navigation */
+#nav-container {
+    background-color: white;
+    text-transform: uppercase;
+}
+
+#nav-title h1{
+    font-weight: bold;
+}
+#nav-title h6{
+    font-weight: bold;
+    color: pink;
+}
+/* Top navigation */
+
+/* Main body*/
+.item-container {
+    background-color: white;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.inner-shell {
+    background-color: white;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 20px;
+}
+
+#nav-container, .inner-shell {
+    border-style: solid;
+    border-width: thin;
+    border-color: #efefef;
+}
+
+/* Profile */
+/* Speech bubble */
+.speech-bubble {
+    font-size: 20px;
+    border-style: solid;
+    border-color: rgb(236, 236, 236);
+    position: relative;
+    padding: 10px;
+}
+
+.speech-bubble:after {    
+    background: url(http://1.bp.blogspot.com/-Nx6-gdTY3F8/U8yBO-EOpkI/AAAAAAAACTE/jS1OPBsLWw4/s1600/bg-testimonial-bottom.png) no-repeat;
+    width: 24px;
+    height: 34px;
+    position: absolute;
+    bottom: -34px;
+    left: 90px;
+    content: "";
+}
+/* Speech bubble */
+
+.profile-head {
+    margin-top: 40px;
+}
+
+#profile-img {
+    width: 100px;
+    height: 100px; 
+    border-radius: 50px;
+    opacity: 0.9;
+}
+
+img, .description {
+    vertical-align: middle;
+    display: inline-block; /* Displays an element as an inline-level block container. The element itself is formatted as an inline element, but you can apply height and width values */
+}
+
+span.profile {
+    text-align: left;
+    margin-left: 20px;
+    display: block; /* Displays an element as a block element (like <p>). It starts on a new line, and takes up the whole width */
+}
+
+#profileDescription {
+    font-weight: lighter;
+    font-size: 20px;
+}
+/* Profile */
+
+/* Social Media */
+svg {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+/* Social Media */
+/* Main body*/
