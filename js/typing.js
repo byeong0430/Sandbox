@@ -1,3 +1,8 @@
+/* 
+This code displays each letter in the speech bubble so that it looks like words are being typed
+*/
+
+
 var className = "speech";
 var text = "Hi! My name is Byeong. This blog is where I show you useless personal data. Enjoy!";
 var div = document.getElementsByClassName(className);

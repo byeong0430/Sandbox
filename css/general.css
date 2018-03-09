@@ -1,5 +1,11 @@
-html {
+/* Optional: Makes the sample page fill the window. */
+html, body {
+    height: 100%;
     margin: 0;
+    padding: 0;
+}
+
+html {
     font-size: 0.9rem;
     font-weight: 300;
     line-height: 1.5;
@@ -13,26 +19,21 @@ body {
     text-align: center;
 }
 
+
 /* Top navigation */
 #nav-container {
     background-color: white;
     text-transform: uppercase;
 }
 
-#nav-title h1{
-    font-weight: bold;
-    margin-top: 20px;
-}
-#nav-title h6{
-    font-weight: bold;
-    color: pink;
-}
-
-.navbar-toggler {
+.navbar-header, .navbar-toggler {
     margin: auto;
     display: block;
 }
 
+.navbar-brand {
+    font-size: 25px;
+}
 /* Top navigation */
 
 /* Main body*/
@@ -125,3 +126,62 @@ svg {
 }
 /* Social Media */
 /* Main body*/
+
+
+/* Consent form */
+#consent-detail {
+    text-align: left;
+}
+
+/* Autocomplete form */
+td {
+    text-align: left;
+}
+
+td.label {
+    text-align: right;
+}
+/* Autocomplete form */
+
+/* Map */
+#map {
+    width: 100%;
+    height: 400px;
+}
+
+.controls {
+    background-color: #fff;
+    border-radius: 2px;
+    border: 1px solid transparent;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+    height: 29px;
+    margin-left: 17px;
+    margin-top: 10px;
+    outline: none;
+    padding: 0 11px 0 13px;
+    text-overflow: ellipsis;
+    width: 350px;
+  }
+
+  .controls:focus {
+    border-color: #4d90fe;
+  }
+
+  .title {
+    font-weight: bold;
+  }
+
+  #infowindow-content {
+    display: none;
+  }
+
+  #map #infowindow-content {
+    display: inline;
+  }
+/* Map */
+
+/* Consent form */
