@@ -30,7 +30,7 @@
 
     <!-- Process window -->
     <div class="row">
-        <div class="col-12 inner-shell" id="socialmedia-wrapper">
+        <div class="col-12 inner-shell" id="progressbar-wrapper">
             <h5>Progress Bar</h5>
             <hr>
             <span class="consent-span">

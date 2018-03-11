@@ -4,6 +4,7 @@
 <div id="map"></div>
 <div id="infowindow-content">
     <span id="place-name" class="map-info title"></span>
+    <span id="place-id" class="map-info"></span>
     <span id="place-address" class="map-info"></span>
     <span class="badge badge-pill badge-primary" id="drag-badge">Drag me</span>
 </div>
