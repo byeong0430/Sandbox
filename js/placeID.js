@@ -16,17 +16,58 @@ function containsAll(needles, haystack){
 }
 
 
+function create_btn(type, size, id, text){
+    var btn = '<button type="button" class="btn ' + type + ' ' + size + '" id="' + id + '">' + text + '</button>';
+    return btn;
+}
+
+
+function savebtn_click(button_id, host){
+    //Function when the button is clicked
+    $("#" + button_id).click(function(){
+        //get all trs' ids
+        var alltr = $(".location-tr");
+        var removeTD = "remove-td";
+        var placeID = [];
+        var maptitleID = "map-title";
+        var newTitle = "Registration Complete! Thank you!";
+
+        for (var i = 0; i < alltr.length; i++){
+            //Remove "tr-" from each tr id and push it to empty array placeID
+            eachID = $(alltr[i]).attr("id").replace('tr-', '');
+            placeID.push(eachID);
+        }
+
+        updateMap(placeID);
+
+
+
+        //Hide all remove icons and save button
+        $("." + removeTD).hide();
+        $("#" + button_id).hide();
+
+        //Change the map title to "Registration Complete!"
+        $("#" + maptitleID).text(newTitle);
+    });
+}
+
+
 function add_submitBttn(){
+    //Get all non-empty tr elements
     var filledTR = document.querySelectorAll(".location-tr:not(:empty)");
     var host = "progressbar-wrapper";
-    var button_id = "submit-btn"; ;
+    var savebtn_id = "submit-btn";
 
-    console.log(filledTR);
-    if (filledTR.length > 0 && $("#" + button_id).length == 0){
-        $("#" + host).append('<button type="button" class="btn btn-primary btn-sm" id="' + button_id + '">Save</button>');
-        $("#" + button_id).click(function(){
-            updateMap();
-        });
+    //If there is at least 1 non-empty row and a button hasn't been created, add a save button
+    if (filledTR.length > 0 && $("#" + savebtn_id).length == 0){
+        //Create a button
+        var btn = create_btn("btn-primary", "btn-sm", savebtn_id, "Save");
+        
+        $("#" + host).append(btn);
+
+        savebtn_click(savebtn_id);
+    
+    //If there is no filledup row and there is already a button, remove that button
     }else if (filledTR.length == 0 && $("#" + button_id).length > 0){
         $("#" + button_id).remove();
     }
@@ -43,20 +84,28 @@ function drag_drop(content, dragItem_id, dropTarget_id){
     
     $("#td-" + dropTarget_id).droppable({
         activate: function(event, ui) {
-            $("#td-" + dropTarget_id).css({
+            $(this).css({
                 "box-shadow": "3px 3px 15px #666",
                 "background-color": "#fff",
             });
         },
         deactivate: function(event, ui) {
-            $("#td-" + dropTarget_id).css({
+            $(this).css({
                 "box-shadow": "none",
                 "background-color": "none",
             });
+
+            /* 
+            After a draggable is successfully dropped, disable the droppable option for the current droppable.
+            Otherwise in subsequent incidents, all rows will be droppable. 
+            */
+            if ($(this).html().length > 0){
+                $(this).droppable("option", "disabled", true);
+            }
         },
         drop: function(event, ui) {
             $(this).html(content); //Append the address to the target td
-
+            
             //Also if is only one td in tr, add a rubbish bin icon
             if ($("#tr-" + dropTarget_id).children("td").length == 1){
                 var garbage_td = '<td class="remove-td" id="remove-' + dropTarget_id + '">' + garbage_icon + '</td>';
@@ -72,7 +121,8 @@ function drag_drop(content, dragItem_id, dropTarget_id){
 }
 
 
-function initMap() {    
+//Create an initial map
+function create_iniMap(){
     //Initial map center point
     var ini_center = {lat: 49.2827, lng: -123.1207};
     var ini_zoom = 13;
@@ -80,6 +130,13 @@ function initMap() {
         center: ini_center,
         zoom: ini_zoom
     });
+
+    return map;
+}
+
+
+function initMap() {    
+    map = create_iniMap();
 
     var input = document.getElementById('pac-input');
 
@@ -94,6 +151,7 @@ function initMap() {
     var marker = new google.maps.Marker({
         map: map
     });
+
     marker.addListener('click', function() {
         infowindow.open(map, marker);
     });
@@ -140,7 +198,7 @@ function initMap() {
         marker.setVisible(true);
         
         infowindowContent.children['place-name'].textContent = place.name;
-        infowindowContent.children['place-id'].textContent = place.place_id;
+        //infowindowContent.children['place-id'].textContent = place.place_id;
         infowindowContent.children['place-address'].textContent = place.formatted_address;
         infowindow.open(map, marker);
         
@@ -176,34 +234,50 @@ function initMap() {
     
 }
 
-function updateMap() {
-    //Initial map center point
-    var ini_center = {lat: 49.2827, lng: -123.1207};
-    var ini_zoom = 13;
-    var map = new google.maps.Map(document.getElementById('map'), {
-        center: ini_center,
-        zoom: ini_zoom
-    });
+
+function updateMap(placeID) {
+    //create empty LatLngBounds object
+    var bounds = new google.maps.LatLngBounds();
+    var infowindow = new google.maps.InfoWindow();  
+    var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var labelIndex = 0;
+
+    map = create_iniMap();
 
     var infowindow = new google.maps.InfoWindow();
     var service = new google.maps.places.PlacesService(map);
+    
 
-    service.getDetails({
-        placeId: 'ChIJv1NxVGBxhlQRT1bpKNwx78A'
-    }, function(place, status) {
-        console.log(place);
-        /*
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-            var marker = new google.maps.Marker({
-                map: map,
-                position: place.geometry.location
-            });
-            google.maps.event.addListener(marker, 'click', function() {
-                infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-                'Place ID: ' + place.place_id + '<br>' +
-                place.formatted_address + '</div>');
-                infowindow.open(map, this);
-            });
-        }*/
+    //Loop through each of the selected places and place it on the map
+    placeID.forEach(function(el){
+        service.getDetails({
+            placeId: el
+        }, function(place, status) {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: place.geometry.location, //lat, lng
+                    label: labels[labelIndex++ % labels.length]
+                });
+
+                //extend the bounds to include each marker's position
+                bounds.extend(marker.position);
+
+                var detail = 
+                '<div><strong>' + place.name + '</strong><br>' +
+                place.formatted_address + '</div>';
+
+                google.maps.event.addListener(marker, 'click', function() {
+                    infowindow.setContent(detail);
+                    infowindow.open(map, this);
+                });
+
+                map.fitBounds(bounds); //auto-zoom
+                map.panToBounds(bounds); //auto-center
+            }
+        });
     });
+    
+
+    
 }

@@ -133,6 +133,12 @@ svg.progress-icon {
 tr, td {
     text-align: center;
 }
+
+/* Buttons in the progress bar */
+.btn {
+    margin-left: 5px;
+    margin-right: 5px;
+}
 /* Progress bar */
 /* Profile */
 
