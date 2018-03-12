@@ -1,7 +1,7 @@
 <nav class="navbar navbar-light navbar-expand-md" role="navigation" id="nav-container">
     <div class="navbar-header">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
-            ☰
+            <i class="fas fa-bars fa-1x"></i>
         </button>
         <a class="navbar-brand" href="#">Byeong's Data Field</a>
     </div>

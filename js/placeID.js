@@ -22,25 +22,23 @@ function create_btn(type, size, id, text){
 }
 
 
-function savebtn_click(button_id, host){
+function savebtn_click(button_id){
     //Function when the button is clicked
     $("#" + button_id).click(function(){
-        //get all trs' ids
-        var alltr = $(".location-tr");
+        //get all tds' ids
+        var allTD = $(".location-td:not(:empty)");
         var removeTD = "remove-td";
         var placeID = [];
         var maptitleID = "map-title";
-        var newTitle = "Registration Complete! Thank you!";
+        var newTitle = "Registration Successful! Thank you!";
 
-        for (var i = 0; i < alltr.length; i++){
+        for (var i = 0; i < allTD.length; i++){
             //Remove "tr-" from each tr id and push it to empty array placeID
-            eachID = $(alltr[i]).attr("id").replace('tr-', '');
+            eachID = $(allTD[i]).attr("id").replace('td-', '');
             placeID.push(eachID);
         }
-
+        
         updateMap(placeID);
-
-
 
         //Hide all remove icons and save button
         $("." + removeTD).hide();
@@ -64,13 +62,12 @@ function add_submitBttn(){
         var btn = create_btn("btn-primary", "btn-sm", savebtn_id, "Save");
         
         $("#" + host).append(btn);
-
-        savebtn_click(savebtn_id);
-    
     //If there is no filledup row and there is already a button, remove that button
-    }else if (filledTR.length == 0 && $("#" + button_id).length > 0){
-        $("#" + button_id).remove();
+    }else if (filledTR.length == 0 && $("#" + savebtn_id).length > 0){
+        $("#" + savebtn_id).remove();
     }
+
+    savebtn_click(savebtn_id);
 }
 
 
@@ -208,7 +205,7 @@ function initMap() {
         var dragItem_id = "drag-badge";
         var dropTarget_id = place.place_id;
 
-        $("." + droptbody_class).append('<tr class="location-tr" id="tr-' + dropTarget_id + '"><td id="td-' + dropTarget_id + '"></td></tr>');
+        $("." + droptbody_class).append('<tr class="location-tr" id="tr-' + dropTarget_id + '"><td class="location-td" id="td-' + dropTarget_id + '"></td></tr>');
 
         //Execute drag and drop function
         drag_drop(content, dragItem_id, dropTarget_id);
@@ -223,7 +220,7 @@ function initMap() {
             
             add_submitBttn();
 
-            //If the removed row's id was for saving the current location, re-create the row again
+            //If the removed row's id was for saving the current location, re-create the row again            
             if (selected_rowID == "tr-" + dropTarget_id){
                 $("." + droptbody_class).append('<tr class="location-tr" id="tr-' + dropTarget_id + '"><td id="td-' + dropTarget_id + '"></td></tr>');
                 drag_drop(content, dragItem_id, dropTarget_id);
@@ -247,7 +244,6 @@ function updateMap(placeID) {
     var infowindow = new google.maps.InfoWindow();
     var service = new google.maps.places.PlacesService(map);
     
-
     //Loop through each of the selected places and place it on the map
     placeID.forEach(function(el){
         service.getDetails({
@@ -271,13 +267,14 @@ function updateMap(placeID) {
                     infowindow.setContent(detail);
                     infowindow.open(map, this);
                 });
-
-                map.fitBounds(bounds); //auto-zoom
+                
+                map.fitBounds(bounds);
+                //If only one location is selected map.fitBounds(bounds) will zoom in to that location too much.
+                //In this case, set the manual zoom to 12
+                if (placeID.length == 1) {map.setZoom(12)};
                 map.panToBounds(bounds); //auto-center
             }
         });
     });
-    
-
-    
+        
 }
