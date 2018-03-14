@@ -28,11 +28,15 @@ body {
 
 .navbar-header, .navbar-toggler {
     margin: auto;
-    display: block;
+    display: inline;
+}
+
+#line3-icon {
+    font-size: 12px;
 }
 
 .navbar-brand {
-    font-size: 25px;
+    font-size: 19px;
 }
 /* Top navigation */
 
@@ -59,6 +63,13 @@ body {
     border-radius: 3px;
 }
 
+
+/* Signup sheet */
+.login-col, .signup-col{
+    margin-bottom: 15px;
+}
+/* Signup sheet */
+
 /* Profile */
 /* Speech bubble */
 .speech-bubble {
@@ -80,7 +91,7 @@ body {
     height: 34px;
     position: absolute;
     bottom: -34px;
-    left: 90px;
+    left: 220px;
     content: "";
 }
 
@@ -119,7 +130,7 @@ span.profile {
 }
 
 /* Social Media */
-svg {
+svg.socialmedia-icon {
     margin-left: 10px;
     margin-right: 10px;
 }
@@ -136,9 +147,10 @@ tr, td {
 
 /* Buttons in the progress bar */
 .btn {
-    margin-left: 5px;
-    margin-right: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
+
 /* Progress bar */
 /* Profile */
 
