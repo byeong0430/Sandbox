@@ -19,11 +19,24 @@ body {
     text-align: center;
 }
 
+/* Underline during hover */
+div > ul > li > a { /* Draw a transparent bottom border to create space for hover action below*/
+    border-bottom: 2px solid transparent;
+}
 
+div > ul > li > a:hover { 
+    border-bottom: 2px solid rgb(47, 78, 250);
+    transition: 0.2s ease-in-out; /* Phase in and out */
+}
+/* Underline during hover */
 /* Top navigation */
 #nav-container {
     background-color: white;
     text-transform: uppercase;
+    /* Shadow effect. horizontal, vertical, blur, spread */
+    -webkit-box-shadow: 7px 7px 6px -6px #777;
+    -moz-box-shadow: 7px 7px 6px -6px #777;
+        box-shadow: 7px 7px 6px -6px #777;
 }
 
 .navbar-header, .navbar-toggler {
@@ -54,6 +67,10 @@ body {
     margin-top: 15px;
     margin-bottom: 15px;
     padding: 15px;
+    /* Shadow effect. horizontal, vertical, blur, spread */
+    -webkit-box-shadow: 7px 7px 6px -6px #777;
+    -moz-box-shadow: 7px 7px 6px -6px #777;
+        box-shadow: 7px 7px 6px -6px #777;
 }
 
 #nav-container, .inner-shell {
@@ -86,7 +103,7 @@ body {
 }
 
 .speech-bubble:after {    
-    background: url(http://1.bp.blogspot.com/-Nx6-gdTY3F8/U8yBO-EOpkI/AAAAAAAACTE/jS1OPBsLWw4/s1600/bg-testimonial-bottom.png) no-repeat;
+    background: url(https://1.bp.blogspot.com/-Nx6-gdTY3F8/U8yBO-EOpkI/AAAAAAAACTE/jS1OPBsLWw4/s1600/bg-testimonial-bottom.png) no-repeat;
     width: 24px;
     height: 34px;
     position: absolute;

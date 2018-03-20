@@ -4,17 +4,14 @@
             <div class="col-7 signup-col">
                 <label for="validationCustomUsername"><h5>Sign up with your email address</h5></label>
                 <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrepend">@</span>
-                    </div>
-                    <input type="email" class="form-control" id="validationCustomUsername" placeholder="Email" aria-describedby="inputGroupPrepend" required>
+                    <input name="input_email" type="email" class="form-control" id="validationCustomUsername" placeholder="Email" aria-describedby="inputGroupPrepend" required>
                     <div class="invalid-feedback">
                         Please choose a valid email address.
                     </div>
                 </div>
             </div>
             <div class="col-7 signup-col">
-                <input type="password" class="form-control" id="password" placeholder="Password" required>
+                <input name="input_password" type="password" class="form-control" id="password" placeholder="Password" required>
                 <div class="invalid-feedback">
                     Please provide a valid password.
                 </div>

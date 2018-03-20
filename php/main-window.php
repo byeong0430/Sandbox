@@ -9,17 +9,17 @@
     </div>
     <div id="placefinder" class="tab-pane fade show active" role="tabpanel" aria-labelledby="placefinder-tab">
         <div class="row">
-            <div class="col-12 inner-shell" id="login-wrapper" style="display: none;">
-                <?php //require("login-form.php") ?>
-            </div>
-        </div>
-        <div class="row">
             <div class="col-12 inner-shell" id="signup-wrapper" style="display: none;">
-                <?php //require("signup-form.php") ?>
+                <?php require("signup-form.php") ?>
             </div>
         </div>
         <div class="row">
-            <div class="col-12 inner-shell" id="consent-detail-wrapper">
+            <div class="col-12 inner-shell" id="login-wrapper">
+                <?php require("login-form.php") ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 inner-shell" id="consent-detail-wrapper"  style="display: none;">
                 <?php require("consent-form.php") ?>
             </div>
         </div>
@@ -30,5 +30,3 @@
         </div>
     </div>
 </div>
-
-<!-- style="display: none;" -->

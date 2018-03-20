@@ -4,9 +4,6 @@
             <div class="col-7 login-col">
                 <label for="login-email"><h5>Please login</h5></label>
                 <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="login-span">@</span>
-                    </div>
                     <input type="email" name="login_email" class="form-control" id="login-email" placeholder="Email" aria-describedby="inputGroupPrepend" required>
                     <div class="invalid-feedback">
                         Please choose a valid email address.

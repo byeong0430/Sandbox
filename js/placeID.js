@@ -28,17 +28,20 @@ function savebtn_click(button_id){
         //get all tds' ids
         var allTD = $(".location-td:not(:empty)");
         var removeTD = "remove-td";
-        var placeID = [];
+        var places = {}; //Empty object to create json
         var maptitleID = "map-title";
         var newTitle = "Registration Successful! Thank you!";
 
         for (var i = 0; i < allTD.length; i++){
             //Remove "tr-" from each tr id and push it to empty array placeID
             eachID = $(allTD[i]).attr("id").replace('td-', '');
-            placeID.push(eachID);
+            eachName = $(allTD[i]).attr("name");
+
+            places["loc_" + i] = {"name":eachName, "placeid":eachID}; //Save the place names and ids in json form
         }
         
-        updateMap(placeID);
+        //Update Google Maps with the locations
+        updateMap(places);
 
         //Hide all remove icons and save button
         $("." + removeTD).hide();
@@ -47,16 +50,25 @@ function savebtn_click(button_id){
         //Change the map title to "Registration Complete!"
         $("#" + maptitleID).text(newTitle);
 
+
+        //Compile a full set of data to send to python via ajax
+        var postData = {
+            "accountID": 1,
+            "places": places
+        };
+
+        //console.log(postData);
+
         $.ajax({
-            url: 'php/ajax/save_locations.php',
+            url: 'py/insert_placeID.py',
             type: 'post',
-            dataType: 'text',
-            data: {
-                accountID: 1,
-                placeID: placeID
+            dataType: 'text', //type of data to be RETURNED
+            data: postData,
+            success: function(response) {
+                console.log(response);
             },
-            success: function(data) {
-                console.log(data);
+            error: function (request, status, error) {
+                console.log(error);
             }
         });
 
@@ -215,11 +227,15 @@ function initMap() {
         
 
         //Create an id for an empty row for the searched address using the unique place id
-        var content = place.formatted_address;
+        var content = place.formatted_address; //Address
         var dragItem_id = "drag-badge";
+        var placeName = place.name;
         var dropTarget_id = place.place_id;
 
-        $("." + droptbody_class).append('<tr class="location-tr" id="tr-' + dropTarget_id + '"><td class="location-td" id="td-' + dropTarget_id + '"></td></tr>');
+        var appendRow = '<tr class="location-tr" id="tr-' + dropTarget_id + '">'
+            appendRow += '<td class="location-td" name="' + placeName + '" id="td-' + dropTarget_id + '"></td></tr>';
+
+        $("." + droptbody_class).append(appendRow);
 
         //Execute drag and drop function
         drag_drop(content, dragItem_id, dropTarget_id);
@@ -236,7 +252,8 @@ function initMap() {
 
             //If the removed row's id was for saving the current location, re-create the row again            
             if (selected_rowID == "tr-" + dropTarget_id){
-                $("." + droptbody_class).append('<tr class="location-tr" id="tr-' + dropTarget_id + '"><td id="td-' + dropTarget_id + '"></td></tr>');
+                $("." + droptbody_class).append(appendRow);
+
                 drag_drop(content, dragItem_id, dropTarget_id);
             }
         });
@@ -246,7 +263,7 @@ function initMap() {
 }
 
 
-function updateMap(placeID) {
+function updateMap(places) {
     //create empty LatLngBounds object
     var bounds = new google.maps.LatLngBounds();
     var infowindow = new google.maps.InfoWindow();  
@@ -259,9 +276,9 @@ function updateMap(placeID) {
     var service = new google.maps.places.PlacesService(map);
     
     //Loop through each of the selected places and place it on the map
-    placeID.forEach(function(el){
+    $.each(places, function(i, el){
         service.getDetails({
-            placeId: el
+            placeId: el.placeid
         }, function(place, status) {
             if (status === google.maps.places.PlacesServiceStatus.OK) {
                 var marker = new google.maps.Marker({
@@ -285,7 +302,8 @@ function updateMap(placeID) {
                 map.fitBounds(bounds);
                 //If only one location is selected map.fitBounds(bounds) will zoom in to that location too much.
                 //In this case, set the manual zoom to 12
-                if (placeID.length == 1) {map.setZoom(12)};
+                var placeLength = Object.keys(places).length;
+                if (placeLength == 1) {map.setZoom(12)};
                 map.panToBounds(bounds); //auto-center
             }
         });
