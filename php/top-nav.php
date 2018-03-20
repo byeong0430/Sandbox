@@ -1,12 +1,7 @@
 <nav class="navbar navbar-light navbar-expand-md" role="navigation" id="nav-container">
     <div class="navbar-header">
-<<<<<<< HEAD
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
             <span class="navbar-toggler-icon" id="line3-icon"></span>
-=======
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
-            <i class="fas fa-bars fa-1x"></i>
->>>>>>> 9f1d1fb3eb9e9093c54a5301ce5eb719051fba3d
         </button>
         <a class="navbar-brand">Byeong's Data Field</a>
     </div>
@@ -29,10 +24,11 @@
                 </a>
             </li>
         </ul>
-        <form class="form-inline ml-md-auto">
-            <button class="btn btn-outline-primary" id="topnav-signup-btn" >Signup</button>
-            <button class="btn btn-outline-success" id="topnav-login-btn" clicked>Login</button>
-        </form>
     </div>
+
+    <form class="form-inline ml-md-auto">
+        <button class="btn btn-outline-primary" id="topnav-signup-btn" >Signup</button>
+        <button class="btn btn-outline-success" id="topnav-login-btn" clicked>Login</button>
+    </form>
 </nav>
 <!-- Navigation -->

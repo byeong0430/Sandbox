@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12 inner-shell" id="consent-detail-wrapper"  style="display: none;">
+            <div class="col-12 inner-shell" id="consent-detail-wrapper">
                 <?php require("consent-form.php") ?>
             </div>
         </div>

@@ -5,68 +5,6 @@ var signup_wrapper = "signup-wrapper";
 var signup_radio = "signup-radio";
 var businessName_holder = "businessName-holder";
 var businessName_inputID = "businessName";
-var signup_submit_btn = "signup-submit-btn";
-
-
-//Radio button for self-employment question
-$("." + signup_radio).on("click", function(){
-    var radio_val = $("." + signup_radio + ":checked").val(); //1: yes 2: no
-    radio_val == 2 ? 
-    $("#" + businessName_holder).show("fast") : 
-    $("#" + businessName_holder).hide("fast");
-});
-
-
-// Example starter JavaScript for disabling form submissions if there are invalid fields
-(function() {
-    'use strict';
-    window.addEventListener('load', function() {
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        var forms = document.getElementsByClassName('needs-validation');
-
-        // Loop over them and prevent submission
-        var validation = Array.prototype.filter.call(forms, function(form) {
-            var submit_btn = document.getElementById(signup_submit_btn);
-
-            //Create an event when you click on the submit button
-            submit_btn.addEventListener('click', function(event) {
-                var id = $("#" + "validationCustomUsername").val();
-                var password = $("#" + "password").val();
-                var radio_val = $("." + signup_radio + ":checked").val();
-                var business = $("#" + businessName_inputID + ":visible").val();
-                var consent_check = $("#" + "invalidCheck" + ":checked");
-                
-                //If the form is incomplete, stop the button's default action
-                if (id.length * password.length  == 0 || (radio_val == 2 && business.length == 0) || consent_check.length == 0){
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                }else{
-                    var business = radio_val == 1 ? "Sole proprietorship" : $("#" + "businessName").val();
-                    
-                    $.ajax({
-                        url: 'py/signup.py',
-                        type: 'post',
-                        dataType: 'text', //type of data to be returned
-                        data: $("#" + "needs-validation").serialize(),
-                        success: function(response){
-                            console.log(response);
-                        },
-                        error: function(request, status, error){
-                            console.log(error);
-                        }
-                    });
-                    event.preventDefault();
-                    event.stopPropagation();
-                    
-                }
-
-                form.classList.add('was-validated'); //Add 'was-validated' in the form's classname
-            }, false);
-        });
-    }, false);
-})();
 
 
 //Show signup page
@@ -81,5 +19,76 @@ $("#" + signup_btn).on("click", function(event){
         $("#" + login_wrapper).hide("fast"); //Hide login div
     }
 })
+
+
+//Radio button for self-employment question
+$("." + signup_radio).on("click", function(){
+    var radio1_business = "Sole Proprietorship";
+
+    $("." + signup_radio).prop('checked', false); //Uncheck all radio buttons
+    $(this).prop('checked', true); //Check the one you selected
+
+    var radio_val = $(this).val(); //1: yes 2: no
+    if (radio_val == 2){
+        $("#" + businessName_inputID).val(""); 
+        $("#" + businessName_holder).show("fast");
+    }else{
+        $("#" + businessName_inputID).val(radio1_business) //If "yes" radio button is selected, add "Sole Proprietorship" to business name input
+        $("#" + businessName_holder).hide("fast");
+    }
+});
+
+
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function() {
+    'use strict';
+    window.addEventListener('load', function() {
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.getElementsByClassName('needs-validation');
+
+        // Loop over them and prevent submission
+        var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+                var resultJSON = {};
+                var radio_val = $("." + signup_radio + ":checked").val();
+                var consent_check = $("#" + "invalidCheck" + ":checked");
+
+                //Save the form results as json object
+                var form_result = $('#signup-form').serializeArray();
+                $.each(form_result, function(){
+                    resultJSON[this.name] = this.value;
+                })
+
+                //If the form is incomplete, stop the button's default action
+                if (resultJSON.input_email.length * resultJSON.input_password.length  == 0 
+                    || (radio_val == 2 && resultJSON.business_name.length == 0) || consent_check.length == 0){
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }else{
+                    $.ajax({
+                        url: 'py/signup.py',
+                        type: 'post',
+                        dataType: 'text', //type of data to be returned
+                        data: resultJSON,
+                        success: function(response){
+                            console.log(response);
+                        },
+                        error: function(request, status, error){
+                            console.log(error);
+                        }
+                    });
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+            }, false);
+        });
+    }, false);
+})();
+
+
+
 
 

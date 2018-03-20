@@ -1,9 +1,15 @@
 #!/usr/bin/python
 import json, cgi, cgitb, MySQLdb
 
+print("Content-type: text/plain\r\n")
+
 #Variables
 sql_tbl = "location"
 sql_col = ["account_id", "place_name", "place_id"]
+host = "localhost"
+user = "update_user"
+password = "Qudrb0430!"
+dbase = "byeong_dev"
 delim = ","
 update_val = []
 
@@ -39,23 +45,22 @@ for x in range(0, placeLength):
 multi_val = delim.join(update_val)
 
 #Construct mysql insert query
-insert_query = "INSERT IGNORE INTO " + sql_tbl + " (" + delim.join(sql_col) + ") VALUES " + multi_val 
+insert_query = "INSERT IGNORE INTO %s (%s) VALUES %s" % (sql_tbl, delim.join(sql_col), multi_val)
 #End - 1. Construct insert query
 
 #2. Execute the insert query
-db = MySQLdb.connect(host="localhost", user="admin_user", passwd="Pe2chMonkeyD2nce!", db="byeong_dev")
+db = MySQLdb.connect(host=host, user=user, passwd=password, db=dbase)
 
 #You must create a Cursor object. It will let you execute all the queries you need
 cur = db.cursor()
 
-print("Content-type: text/plain\r\n")
 #Execute the insert query
 try:
     sql_exe = cur.execute(insert_query)
     db.commit()
     print("Update successful!")
-except MySQLdb.Error as e:
-    print(e)
+#except MySQLdb.Error as e:
+#    print(e)
 finally:
     if cur != None:
         cur.close()

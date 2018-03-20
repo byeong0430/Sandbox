@@ -24,11 +24,7 @@ function create_btn(type, size, id, text){
 
 function savebtn_click(button_id){
     //Function when the button is clicked
-<<<<<<< HEAD
     $("body").on("click", "#" + button_id, function(){
-=======
-    $("#" + button_id).click(function(){
->>>>>>> 9f1d1fb3eb9e9093c54a5301ce5eb719051fba3d
         //get all tds' ids
         var allTD = $(".location-td:not(:empty)");
         var removeTD = "remove-td";
@@ -315,8 +311,4 @@ function updateMap(places) {
         });
     });
         
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 9f1d1fb3eb9e9093c54a5301ce5eb719051fba3d

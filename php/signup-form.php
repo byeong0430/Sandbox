@@ -18,11 +18,11 @@
             </div>
             <div class="col-7 signup-col">
                 <span>Are you self-employed? </span>
-                <label><input class="signup-radio" checked id="radio-Y" type="radio" name="employmentType" value=1 required>Yes</label>
-                <label><input class="signup-radio" id="radio-N" type="radio" name="employmentType" value=2>No</label>
+                <label><input name="radio_Y" class="signup-radio" checked id="radio-Y" type="radio" name="employmentType" value=1 required>Yes</label>
+                <label><input name="radio_N" class="signup-radio" id="radio-N" type="radio" name="employmentType" value=2>No</label>
             </div>
             <div class="col-7 signup-col" style="display: none;" id="businessName-holder">
-                <input type="text" class="form-control" id="businessName" placeholder="Business Name" required>
+                <input name="business_name" type="text" class="form-control" id="businessName" placeholder="Business Name" value="Sole Proprietorship" required>
                 <div class="invalid-feedback">
                     Please provide a valid name.
                 </div>
