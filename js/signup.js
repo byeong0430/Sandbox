@@ -17,6 +17,8 @@ $("#" + signup_btn).on("click", function(event){
     if (signup_wrapper_visible == 0){
         $("#" + signup_wrapper).show("fast"); //Show signup div
         $("#" + login_wrapper).hide("fast"); //Hide login div
+    }else{
+        $("#" + signup_wrapper).hide("fast"); //Hide signup div
     }
 })
 

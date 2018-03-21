@@ -59,8 +59,11 @@ try:
     sql_exe = cur.execute(insert_query)
     db.commit()
     print("Update successful!")
-#except MySQLdb.Error as e:
-#    print(e)
+except MySQLdb.Error as e:
+    try:
+        print("MySQL Error [%d]: %s" % (e.args[0], e.args[1]))
+    except IndexError:
+        print("MySQL Error: %s" % str(e))
 finally:
     if cur != None:
         cur.close()

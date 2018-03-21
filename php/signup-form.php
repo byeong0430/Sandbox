@@ -1,7 +1,7 @@
 <div class="col-12">
     <form class="needs-validation" id="signup-form" novalidate>
-        <div class="row justify-content-lg-center">
-            <div class="col-7 signup-col">
+        <div class="row justify-content-center">
+            <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 signup-col">
                 <label for="validationCustomUsername"><h5>Sign up with your email address</h5></label>
                 <div class="input-group">
                     <input name="input_email" type="email" class="form-control" id="validationCustomUsername" placeholder="Email" aria-describedby="inputGroupPrepend" required>
@@ -10,18 +10,18 @@
                     </div>
                 </div>
             </div>
-            <div class="col-7 signup-col">
+            <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 signup-col">
                 <input name="input_password" type="password" class="form-control" id="password" placeholder="Password" required>
                 <div class="invalid-feedback">
                     Please provide a valid password.
                 </div>
             </div>
-            <div class="col-7 signup-col">
+            <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 signup-col">
                 <span>Are you self-employed? </span>
                 <label><input name="radio_Y" class="signup-radio" checked id="radio-Y" type="radio" name="employmentType" value=1 required>Yes</label>
                 <label><input name="radio_N" class="signup-radio" id="radio-N" type="radio" name="employmentType" value=2>No</label>
             </div>
-            <div class="col-7 signup-col" style="display: none;" id="businessName-holder">
+            <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 signup-col" style="display: none;" id="businessName-holder">
                 <input name="business_name" type="text" class="form-control" id="businessName" placeholder="Business Name" value="Sole Proprietorship" required>
                 <div class="invalid-feedback">
                     Please provide a valid name.

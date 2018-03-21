@@ -9,7 +9,7 @@
             <div class="profile-head">
                 <img id="profile-img" src="img/profile.jpg" alt="Girl in a jacket" style="vertical-align:middle">
                 <div class="description">
-                    <span class="profile" id="profileName"><h2>Byeong Kim</h2></span>
+                    <span class="profile" id="profileName"><h4>Byeong Kim</h4></span>
                     <span class="profile" id="profileDescription">Data Geek</span>
                 </div>
             </div>

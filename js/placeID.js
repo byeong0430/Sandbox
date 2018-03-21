@@ -71,7 +71,6 @@ function savebtn_click(button_id){
                 console.log(error);
             }
         });
-
     });
 }
 
@@ -94,8 +93,6 @@ function add_submitBttn(){
     }else if (filledTR.length == 0 && $("#" + savebtn_id).length > 0){
         $("#" + savebtn_id).remove();
     }
-
-    savebtn_click(savebtn_id);
 }
 
 

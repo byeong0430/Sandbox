@@ -51,22 +51,29 @@ div > ul > li > a:hover {
 .navbar-brand {
     font-size: 19px;
 }
+
+@media screen and (max-width: 768px) {
+    #top-nav-btn-group {
+        margin: auto;
+        display: inline;
+    }
+}
 /* Top navigation */
 
 /* Main body*/
 .item-container {
     background-color: white;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .inner-shell {
     background-color: white;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    padding: 15px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    padding: 10px;
     /* Shadow effect. horizontal, vertical, blur, spread */
     -webkit-box-shadow: 7px 7px 6px -6px #777;
     -moz-box-shadow: 7px 7px 6px -6px #777;
@@ -83,22 +90,22 @@ div > ul > li > a:hover {
 
 /* Signup sheet */
 .login-col, .signup-col{
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 /* Signup sheet */
 
 /* Profile */
 /* Speech bubble */
 .speech-bubble {
-    font-size: 20px;
+    font-size: 18px;
     border-style: solid;
     border-color: rgb(236, 236, 236);
     position: relative;
-    padding: 15px;
+    padding: 10px;
     width: 100%; /* Fix the speech bubble width to 100% so that it doesn't change as typing.js happens */
     
-    height: 135px;
-    line-height: 90px;
+    height: 100px;
+    line-height: 60px;
     text-align: center;
 }
 
@@ -119,8 +126,13 @@ span {
 }
 /* Speech bubble */
 
+
+#profile-div{
+    margin-top: 10px;
+}
+
 .profile-head {
-    margin-top: 40px;
+    margin-top: 30px;
 }
 
 #profile-img {
@@ -143,7 +155,7 @@ span.profile {
 
 #profileDescription {
     font-weight: lighter;
-    font-size: 20px;
+    font-size: 15px;
 }
 
 /* Social Media */
