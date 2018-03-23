@@ -86,7 +86,7 @@ function add_submitBttn(){
     //If there is at least 1 non-empty row and a button hasn't been created, add a save button
     if (filledTR.length > 0 && $("#" + savebtn_id).length == 0){
         //Create a button
-        var btn = create_btn("btn-primary", "btn-sm", savebtn_id, "Save");
+        var btn = create_btn("btn-primary", "btn-md", savebtn_id, "Save");
         
         $("#" + host).append(btn);
     //If there is no filledup row and there is already a button, remove that button

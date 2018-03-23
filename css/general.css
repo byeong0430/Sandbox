@@ -13,20 +13,22 @@ html {
 
 /* Set default left- and right-margin as 22%*/
 body {
-    background-color: #f5f5f5;
+    background-color: #fcfcfc;
     font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #433d3d;
     text-align: center;
 }
 
 /* Underline during hover */
-div > ul > li > a { /* Draw a transparent bottom border to create space for hover action below*/
-    border-bottom: 2px solid transparent;
-}
+@media screen and (min-width: 768px) {
+    div > ul > li > a { /* Draw a transparent bottom border to create space for hover action below*/
+        border-bottom: 2px solid transparent;
+    }
 
-div > ul > li > a:hover { 
-    border-bottom: 2px solid rgb(47, 78, 250);
-    transition: 0.2s ease-in-out; /* Phase in and out */
+    div > ul > li > a:hover { 
+        border-bottom: 2px solid rgb(47, 78, 250);
+        transition: 0.2s ease-in-out; /* Phase in and out */
+    }
 }
 /* Underline during hover */
 /* Top navigation */
@@ -34,9 +36,9 @@ div > ul > li > a:hover {
     background-color: white;
     text-transform: uppercase;
     /* Shadow effect. horizontal, vertical, blur, spread */
-    -webkit-box-shadow: 7px 7px 6px -6px #777;
-    -moz-box-shadow: 7px 7px 6px -6px #777;
-        box-shadow: 7px 7px 6px -6px #777;
+    -webkit-box-shadow: 4px 4px 4px -6px #777;
+    -moz-box-shadow: 4px 4px 4px -6px #777;
+        box-shadow: 4px 4px 4px -6px #777;
 }
 
 .navbar-header, .navbar-toggler {
@@ -61,9 +63,13 @@ div > ul > li > a:hover {
 /* Top navigation */
 
 /* Main body*/
+.tab-content, .sidebar-content {
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
 .item-container {
     background-color: white;
-    margin-top: 0px;
     margin-bottom: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -71,13 +77,12 @@ div > ul > li > a:hover {
 
 .inner-shell {
     background-color: white;
-    margin-top: 0px;
     margin-bottom: 10px;
     padding: 10px;
     /* Shadow effect. horizontal, vertical, blur, spread */
-    -webkit-box-shadow: 7px 7px 6px -6px #777;
-    -moz-box-shadow: 7px 7px 6px -6px #777;
-        box-shadow: 7px 7px 6px -6px #777;
+    -webkit-box-shadow: 4px 4px 4px -6px #777;
+    -moz-box-shadow: 4px 4px 4px -6px #777;
+        box-shadow: 4px 4px 4px -6px #777;
 }
 
 #nav-container, .inner-shell {
@@ -103,7 +108,6 @@ div > ul > li > a:hover {
     position: relative;
     padding: 10px;
     width: 100%; /* Fix the speech bubble width to 100% so that it doesn't change as typing.js happens */
-    
     height: 100px;
     line-height: 60px;
     text-align: center;
@@ -126,10 +130,6 @@ span {
 }
 /* Speech bubble */
 
-
-#profile-div{
-    margin-top: 10px;
-}
 
 .profile-head {
     margin-top: 30px;

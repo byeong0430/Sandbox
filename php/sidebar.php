@@ -1,4 +1,4 @@
-<div class="col-12">
+<div class="col-12 sidebar-content">
     <!-- Profile -->
     <div class="row">
         <div class="col-12 inner-shell" id="profile-div">

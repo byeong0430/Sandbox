@@ -27,6 +27,7 @@
         <form class="form-inline ml-md-auto" id="top-nav-btn-group">
             <button class="btn btn-outline-primary" id="topnav-signup-btn" >Signup</button>
             <button class="btn btn-outline-success" id="topnav-login-btn" clicked>Login</button>
+            <button class="btn btn-outline-danger" id="topnav-logout-btn" style="display: none;">Logout</button>
         </form>
     </div>
 

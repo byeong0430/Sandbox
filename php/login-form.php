@@ -1,5 +1,5 @@
 <div class="col-12">
-    <form class="needs-validation" id="login-form" method="post" action="php/ajax/login_get.php" novalidate>
+    <form class="needs-validation" id="login-form" novalidate>
         <div class="row justify-content-center">
             <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 login-col">
                 <label for="login-email"><h5>Please login</h5></label>
@@ -18,6 +18,6 @@
             </div>
         </div>
 
-        <button class="btn btn-primary" id="login-submit-btn" type="submit" onclick="login_submit()">Log in</button>
+        <button class="btn btn-primary" id="login-submit-btn" type="submit">Log in</button>
     </form>
 </div>
