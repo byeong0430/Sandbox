@@ -1,7 +1,10 @@
 #!/usr/bin/python
-import json, cgi, cgitb, MySQLdb
 
 print("Content-type: text/plain\r\n")
+
+#Import modules
+import json, cgi, cgitb, MySQLdb
+import string
 
 #Variables
 sql_tbl = "account"
@@ -11,6 +14,7 @@ user = "update_user"
 password = "Qudrb0430!"
 dbase = "byeong_dev"
 delim = ","
+
 
 #1. Construct insert query
 cgitb.enable() # for troubleshooting
@@ -22,7 +26,13 @@ keys = data.keys()
 #Save the passed variables. Make sure each character variable is quoted 
 for x in range(0, len(keys)):
     key_name = keys[x]
-    globals()[key_name] = repr(data[key_name].value)
+    val = data[key_name].value
+
+    #First letter of each word in the business name should be capitalised
+    if key_name == "business_name":
+        val = string.capwords(val)
+    
+    globals()[key_name] = repr(val)
 
 #Password should be hashed before it is saved in mysql
 input_password = "PASSWORD(" + input_password + ")" #Change 
@@ -44,21 +54,17 @@ insert_query = "INSERT IGNORE INTO %s (%s) VALUES %s" % (sql_tbl, delim.join(sql
 
 
 #2. Execute the insert query
-db = MySQLdb.connect(host=host, user=user, passwd=password, db=dbase)
-
-#You must create a Cursor object. It will let you execute all the queries you need
-cur = db.cursor()
-
-#Execute the insert query
 try:
-    sql_exe = cur.execute(insert_query)
-    db.commit()
-    print("Update successful!")
-except MySQLdb.Error as e:
+    db = MySQLdb.connect(host=host, user=user, passwd=password, db=dbase) #Access the database
     try:
-        print("MySQL Error [%d]: %s" % (e.args[0], e.args[1]))
-    except IndexError:
-        print("MySQL Error: %s" % str(e))
-finally:
-    if cur != None:
-        cur.close()
+        cur = db.cursor() #You must create a Cursor object. It will let you execute all the queries you need
+        cur.execute(insert_query) #Execute the insert query
+        db.commit()
+        print(1) # Query successfully executed
+    except MySQLdb.Error as e: #Insert query error
+        print("MySQL Error [%d]" % (e.args[0]))
+except MySQLdb.Error as e: #DB error
+    print("MySQL Error [%d]" % (e.args[0]))
+
+if cur != None:
+    cur.close()

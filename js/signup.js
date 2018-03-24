@@ -22,7 +22,6 @@ $("#" + signup_btn).on("click", function(event){
     }
 })
 
-
 //Radio button for self-employment question
 $("." + signup_radio).on("click", function(){
     var radio1_business = "Sole Proprietorship";
@@ -39,7 +38,6 @@ $("." + signup_radio).on("click", function(){
         $("#" + businessName_holder).hide("fast");
     }
 });
-
 
 //Events after signup is successful
 function after_signup(){
@@ -64,6 +62,45 @@ function after_signup(){
     }, wait_t);
 }
 
+//Validate the signup form and submit it
+function validSignup_submit(form){
+    var resultJSON = {};
+    var signup_form = "signup-form";
+    var url = 'py/signup.py';
+
+    //Save the form results as json object
+    var form_result = $("#" + signup_form).serializeArray();
+    $.each(form_result, function(){
+        resultJSON[this.name] = this.value;
+    })
+
+    //This will display error messages if there are any
+    form.classList.add('was-validated');
+    
+    //form.checkValidity() is true only when all REQUIRED form fields were filled out.
+    if (form.checkValidity() === false) {
+        event.preventDefault();
+        event.stopPropagation();
+    }else{
+        $.ajax({
+            url: url,
+            type: 'post',
+            dataType: 'text', //type of data to be returned
+            data: resultJSON,
+            success: function(response){
+                if(response == 1){
+                    after_signup();
+                }
+            },
+            error: function(request, status, error){
+                console.log(error);
+            }
+        });
+        event.preventDefault();
+        event.stopPropagation();
+    }
+}
+
 
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 (function() {
@@ -75,41 +112,7 @@ function after_signup(){
         // Loop over them and prevent submission
         var validation = Array.prototype.filter.call(forms, function(form) {
             form.addEventListener('submit', function(event) {
-                var resultJSON = {};
-                var signup_form = "signup-form";
-                var radio_val = $("." + signup_radio + ":checked").val();
-                var consent_check = $("#" + "invalidCheck" + ":checked");
-
-                //Save the form results as json object
-                var form_result = $("#" + signup_form).serializeArray();
-                $.each(form_result, function(){
-                    resultJSON[this.name] = this.value;
-                })
-                
-                //If the form is incomplete, stop the button's default action
-                if (resultJSON.input_email.length * resultJSON.input_password.length  == 0 
-                    || (radio_val == 2 && resultJSON.business_name.length == 0) || consent_check.length == 0){
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }else{
-                    $.ajax({
-                        url: 'py/signup.py',
-                        type: 'post',
-                        dataType: 'text', //type of data to be returned
-                        data: resultJSON,
-                        success: function(response){
-                            after_signup();
-                        },
-                        error: function(request, status, error){
-                            console.log(error);
-                        }
-                    });
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
+                validSignup_submit(form);
             }, false);
         });
     }, false);

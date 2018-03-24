@@ -4,9 +4,9 @@
             <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 signup-col">
                 <label for="validationCustomUsername"><h5>Sign up with your email address</h5></label>
                 <div class="input-group">
-                    <input name="input_email" type="email" class="form-control" id="validationCustomUsername" placeholder="Email" aria-describedby="inputGroupPrepend" required>
+                    <input type="email" name="input_email" class="form-control" id="validationCustomUsername" placeholder="Email" aria-describedby="inputGroupPrepend" required>
                     <div class="invalid-feedback">
-                        Please choose a valid email address.
+                        Please provide a valid email address.
                     </div>
                 </div>
             </div>
@@ -18,7 +18,7 @@
             </div>
             <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 signup-col">
                 <span>Are you self-employed? </span>
-                <label><input name="radio_Y" class="signup-radio" checked id="radio-Y" type="radio" name="employmentType" value=1 required>Yes</label>
+                <label><input name="radio_Y" class="signup-radio" checked id="radio-Y" type="radio" name="employmentType" value=1>Yes</label>
                 <label><input name="radio_N" class="signup-radio" id="radio-N" type="radio" name="employmentType" value=2>No</label>
             </div>
             <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 signup-col" style="display: none;" id="businessName-holder">
