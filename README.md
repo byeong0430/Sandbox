@@ -9,5 +9,10 @@ This website contains 3 pages that are independent of each other:
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
-1. Bootstrap v4.0.0
-Click the link to get the [Boostrap starter template (v4.0.0)](https://getbootstrap.com/docs/4.0/getting-started/introduction/#starter-template).
+1. Google Maps API Key
+Click the link to obtain your own [API key](https://developers.google.com/maps/documentation/javascript/get-api-key).
+Replace `**YOUR_API_KEY**` in the code below with your own API key.
+```
+<script src="https://maps.googleapis.com/maps/api/js?key=*YOUR_API_KEY*&libraries=places&callback=initMap"
+        async defer></script>
+```
