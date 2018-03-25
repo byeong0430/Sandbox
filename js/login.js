@@ -2,11 +2,11 @@
 var topnav_signup_btn = "topnav-signup-btn";
 var topnav_login_btn = "topnav-login-btn";
 var topnav_logout_btn = "topnav-logout-btn";
-
 var login_submit_btn = "login-submit-btn";
 var login_wrapper = "login-wrapper";
 var signup_wrapper = "signup-wrapper";
 var consent_wrapper = "consent-detail-wrapper";
+
 
 //Event when the login button on the top nav is clicked on
 $("#" + topnav_login_btn).on("click", function(event){
@@ -23,6 +23,33 @@ $("#" + topnav_login_btn).on("click", function(event){
     }
 })
 
+//Action when login was successful
+function login_success(response){
+    var delim = ";";
+    var span_id = "userid";
+
+    match = response.split(delim)[0]; //1 for matching credentials, 0 for NOT matching credentials
+    id = response.split(delim)[1]; //User id
+
+    var id_container = '<input id="' + span_id + '" value="' + id + '" hidden></input>';
+
+    if ($("#" + span_id).length == 0){
+        $("body").append(id_container);
+        //$("#" + span_id).hide();
+    }else{
+        $("#" + span_id).remove();
+    }
+    
+    if (match == 1){ //True: email and password match what's stored
+        $("#" + login_wrapper).hide("fast");
+        $("#" + consent_wrapper).show("fast");
+        $("#" + topnav_signup_btn).hide("fast");
+        $("#" + topnav_login_btn).hide("fast");
+        $("#" + topnav_logout_btn).show("fast");
+    }
+}
+
+
 //Validate the login form and submit it
 function validLogin_submit(form, login_result){
     form.classList.add('was-validated');
@@ -37,26 +64,7 @@ function validLogin_submit(form, login_result){
             dataType: 'text',
             data: login_result,
             success: function(response) {
-                var delim = ";";
-                var span_id = "userid";
-
-                match = response.split(delim)[0]; //1 for matching credentials, 0 for NOT matching credentials
-                id = response.split(delim)[1]; //User id
-
-                var id_container = '<span id="' + span_id + '">' + id + '</span>';
-
-                if ($("#" + span_id).length == 0){
-                    $("body").append(id_container);
-                    $("#" + span_id).hide();
-                }
-
-                if (match == 1){ //True: email and password match what's stored
-                    $("#" + login_wrapper).hide("fast");
-                    $("#" + consent_wrapper).show("fast");
-                    $("#" + topnav_signup_btn).hide("fast");
-                    $("#" + topnav_login_btn).hide("fast");
-                    $("#" + topnav_logout_btn).show("fast");
-                }
+                login_success(response);
             },
             error: function(request, status, error){
                 console.log(error);

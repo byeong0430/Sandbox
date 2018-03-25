@@ -22,6 +22,7 @@ function create_btn(type, size, id, text){
 }
 
 
+
 function savebtn_click(button_id){
     //Function when the button is clicked
     $("body").on("click", "#" + button_id, function(){
@@ -31,7 +32,9 @@ function savebtn_click(button_id){
         var places = {}; //Empty object to create json
         var maptitleID = "map-title";
         var newTitle = "Registration Successful! Thank you!";
-
+        var span_id = "userid"; //Get the logged in customer's id
+        var accountID = $("#" + span_id).attr("value");
+        
         for (var i = 0; i < allTD.length; i++){
             //Remove "tr-" from each tr id and push it to empty array placeID
             eachID = $(allTD[i]).attr("id").replace('td-', '');
@@ -53,7 +56,7 @@ function savebtn_click(button_id){
 
         //Compile a full set of data to send to python via ajax
         var postData = {
-            "accountID": 1,
+            "accountID": accountID,
             "places": places
         };
 
