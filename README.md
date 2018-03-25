@@ -9,20 +9,28 @@ This website contains 3 pages that are independent of each other:
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
-1. Google Maps API Key
+- Google Maps API Key
     - Click the link to obtain your own [API key](https://developers.google.com/maps/documentation/javascript/get-api-key).
     Replace **`[YOUR_API_KEY]`** in the code below with your own API key.
     ```
-    <script src="https://maps.googleapis.com/maps/api/js?key=
-    ```
-    **`[YOUR_API_KEY]`**
-    ```
-    &libraries=places&callback=initMap"
+    <script src="https://maps.googleapis.com/maps/api/js?key=[YOUR_API_KEY]&libraries=places&callback=initMap"
             async defer></script>
     ```
 
-2. PHP 5.6.34
+- PHP 5.6.34
     - This website requires PHP v5.6.34 on Linux Environment. You can download it by typing the command below:
     ```
     sudo apt-get install php5.6
     ```
+
+## 1. Home
+## 2. Power Usage
+## 3. Google IP Finder
+There are mainly 3 processes involved in the Google IP Finder tab.
+1. Signup
+    - By default the signup window is hidden. You can show it by click on the "Signup" button on the top nav bar.
+    There are 4 segments in the signup form as described below:
+        1. Email
+        2. Password
+        3. Business Name (only enabled when you select the "No" radio button)
+        4. Agree to terms and conditions
