@@ -9,11 +9,10 @@ var businessName_inputID = "businessName";
 
 //Show signup page
 $("#" + signup_btn).on("click", function(event){
-    event.preventDefault(); //Button click refreshes the whole website by default. Disable that
+    event.preventDefault(); //preventDefault() stops clicked anchors from taking the browser to a new URL
 
+    //Check if the signup window is visible
     var signup_wrapper_visible = $("#" + signup_wrapper + ":visible").length;
-    
-    //If the sign-in div doesn't exist
     if (signup_wrapper_visible == 0){
         $("#" + signup_wrapper).show("fast"); //Show signup div
         $("#" + login_wrapper).hide("fast"); //Hide login div
@@ -24,7 +23,7 @@ $("#" + signup_btn).on("click", function(event){
 
 //Radio button for self-employment question
 $("." + signup_radio).on("click", function(){
-    var radio1_business = "Sole Proprietorship";
+    var radio1_business = "Sole Proprietorship"; //Business name if "Yes" is selected
 
     $("." + signup_radio).prop('checked', false); //Uncheck all radio buttons
     $(this).prop('checked', true); //Check the one you selected
